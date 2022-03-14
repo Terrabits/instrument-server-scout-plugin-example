@@ -1,0 +1,13 @@
+plugins:
+  plugins.devices.scout: {}
+devices:
+  rffe:
+    type:     scout
+    port:     /dev/tty.usbmodem1234
+    baudrate: 115200
+    timeout:  0.001
+# Translation Commands
+init:
+  - rffe: mode 1      # RFFE mode
+  - rffe: vio  2      # Vio = 2 V
+  - rffe: clk  39000  # clock: 39 KHz
