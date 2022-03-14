@@ -23,21 +23,24 @@ See the lock file for details:
 
 The Instrument Server Device Plugin interface is used to include support for additional busses and device types.
 
-Device Plugins are typically subclasses of the `instrument_server.device.Base` class. Device Plugins are required to implement at least three methods:
+Device Plugins are typically subclasses of the `instrument_server.device.Base` class.
+
+Device Plugins are required to implement the following methods.
 
 ```python
-Base.__init__(self, **settings)
-Base.read(self)
-Base.write(self, bytes)
+Device.__init__(self, **settings)
+Device.read(self)
+Device.write(self, bytes)
+Device.close(self)
 ```
 
-An implementation of `Base.query` that uses `read` and `write` is provided.
+Note that the device `Base` class implements `Base.query(self, bytes)`, which uses `Device.read` and `Device.write`.
 
 ### Scout
 
 The `Scout` device plugin can be found in [plugins/devices/scout.py](plugins/devices/scout.py).
 
-`Scout` uses `pyserial` to make the serial connection.
+Internally, `Scout` uses `pyserial` to connect.
 
 #### `Scout.__init__`
 
